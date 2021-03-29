@@ -1,25 +1,20 @@
 #include <Arduino.h>
-#include <WiFi.h>
-#include <driver/i2s.h>
-#include "I2SOutput.h"
-#include "I2SMEMSSampler.h"
-#include "UdpTransport.h"
+#include "Application.h"
+
+// our application
+Application *application;
 
 void setup()
 {
   Serial.begin(115200);
-  WiFi.mode(WIFI_STA);
-  WiFi.begin("CMGResearch", "02087552867");
-  if (WiFi.waitForConnectResult() != WL_CONNECTED)
-  {
-    Serial.println("Connection Failed! Rebooting...");
-    delay(5000);
-    ESP.restart();
-  }
-  Serial.println("Started");
+  // start up the application
+  application = new Application();
+  application->begin();
+  Serial.println("Application started");
 }
 
 void loop()
 {
-  delay(1000);
+  application->loop();
+  delay(50);
 }
