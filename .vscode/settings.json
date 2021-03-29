@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "*.rb": "ruby",
+    "SP_ENC.C": "cpp",
+    "SP_DEC.C": "cpp",
+    "DTX.C": "cpp",
+    "HOST.C": "cpp",
+    "VAD.C": "cpp"
+  }
+}
