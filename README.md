@@ -22,6 +22,8 @@ The boards were manufactured by PCBWay and as always they've done a really great
 
 And you can help support the channel by using my referral link: https://www.pcbway.com/setinvite.aspx?inviteid=403566 for other PCBs.
 
+However, you can also easily wire this up on breadboard - that's how I prototyped it. Everything is I2S based so it's just straightforward jumper wires.
+
 # Setup
 
 Everything is configured from the `src/config.h` file. To use UDP Broadcast comment out the line:
