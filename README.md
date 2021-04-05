@@ -12,8 +12,6 @@ I'm using my own microphone board (available on Tindie: https://www.tindie.com/p
 
 For output, I'm using an I2S amplifier breakout board which I'm using the drive a 4ohm speaker. Once again, you can modify the code to use the built-in DAC for output which will let you use headphones or an analogue amplifier board.
 
-As always, the code is on GitHub: https://github.com/atomic14/esp32-walkie-talkie
-
 I've got a great series of videos on ESP32 Audio which are a great resource for anyone who wants to learn more about audio on the ESP32 which you can find here: https://www.youtube.com/playlist?list=PL5vDt5AALlRfGVUv2x7riDMIOX34udtKD
 
 For this project I've 3D printed a case - you can access the Fusion 360 project here: https://a360.co/2PXgAUS
