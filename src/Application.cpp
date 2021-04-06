@@ -4,6 +4,7 @@
 
 #include "Application.h"
 #include "I2SMEMSSampler.h"
+#include "ADCSampler.h"
 #include "I2SOutput.h"
 #include "UdpTransport.h"
 #include "EspNowTransport.h"
@@ -57,7 +58,11 @@ i2s_pin_config_t i2s_speaker_pins = {
 Application::Application()
 {
   m_output_buffer = new OutputBuffer(300 * 16);
+#ifdef USE_I2S_MIC_INPUT
   m_input = new I2SMEMSSampler(i2s_mic_pins);
+#else
+  m_input = new ADCSampler(ADC_UNIT_1, ADC1_CHANNEL_7);
+#endif
   m_output = new I2SOutput();
 #ifdef USE_ESP_NOW
   m_transport = new EspNowTransport(m_output_buffer);
