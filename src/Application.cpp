@@ -90,16 +90,15 @@ void Application::loop()
   while (true)
   {
     // do we need to start transmitting?
-    bool transmit_pushed = digitalRead(GPIO_TRANSMIT_BUTTON);
-    if (transmit_pushed)
+    if (digitalRead(GPIO_TRANSMIT_BUTTON))
     {
       Serial.print("Started transmitting");
       // stop the output as we're switching into transmit mode
       m_output->stop();
       // start the input to get samples from the microphone
       m_input->start();
-      unsigned long start_time = millis();
       // transmit for at least 1 second or while the button is pushed
+      unsigned long start_time = millis();
       while (millis() - start_time < 1000 || digitalRead(GPIO_TRANSMIT_BUTTON))
       {
         // read samples from the microphone
@@ -110,7 +109,7 @@ void Application::loop()
           m_transport->add_sample(samples[i]);
         }
       }
-      // finished transmitting
+      // finished transmitting stop the input and start the output
       Serial.print("Finished transmitting");
       m_input->stop();
       m_output->start(SAMPLE_RATE);
