@@ -1,10 +1,10 @@
 #pragma once
-
-#include "SampleSink.h"
+#include <stdlib.h>
+#include <stdint.h>
 
 class OutputBuffer;
 
-class Transport : public SampleSink
+class Transport
 {
 protected:
   // audio buffer for samples we need to send

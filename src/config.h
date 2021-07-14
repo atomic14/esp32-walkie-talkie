@@ -1,6 +1,12 @@
+#include <freertos/FreeRTOS.h>
+#include <driver/i2s.h>
+
 // WiFi credentials
 #define WIFI_SSID << YOUR_SSID >>
 #define WIFI_PSWD << YOUR_PASSWORD >>
+
+// sample rate for the system
+#define SAMPLE_RATE 16000
 
 // are you using an I2S microphone - comment this out if you want to use an analog mic and ADC input
 #define USE_I2S_MIC_INPUT
@@ -19,6 +25,7 @@
 #define ADC_MIC_CHANNEL ADC1_CHANNEL_7
 
 // speaker settings
+#define USE_I2S_SPEAKER_OUTPUT
 #define I2S_SPEAKER_SERIAL_CLOCK GPIO_NUM_19
 #define I2S_SPEAKER_LEFT_RIGHT_CLOCK GPIO_NUM_27
 #define I2S_SPEAKER_SERIAL_DATA GPIO_NUM_18
@@ -29,3 +36,12 @@
 // Which transport do you want to use? ESP_NOW or UDP?
 // comment out this line to use UDP
 #define USE_ESP_NOW
+
+// i2s config for using the internal ADC
+extern i2s_config_t i2s_adc_config;
+// i2s config for reading from of I2S
+extern i2s_config_t i2s_mic_Config;
+// i2s microphone pins
+extern i2s_pin_config_t i2s_mic_pins;
+// i2s speaker pins
+extern i2s_pin_config_t i2s_speaker_pins;

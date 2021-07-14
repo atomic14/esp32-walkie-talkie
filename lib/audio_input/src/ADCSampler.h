@@ -1,5 +1,4 @@
-#ifndef __adc_sampler_h__
-#define __adc_sampler_h__
+#pragma once
 
 #include "I2SSampler.h"
 
@@ -11,10 +10,8 @@ private:
 
 protected:
     void configureI2S();
-    void processI2SData(uint8_t *i2sData, size_t bytesRead);
 
 public:
-    ADCSampler(adc_unit_t adc_unit, adc1_channel_t adc_channel);
+    ADCSampler(adc_unit_t adc_unit, adc1_channel_t adc_channel, const i2s_config_t &i2s_config);
+    virtual int read(int16_t *samples, int count);
 };
-
-#endif

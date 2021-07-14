@@ -49,6 +49,7 @@ public:
     }
   }
 
+  // we're adding samples that are 8 bit as they are coming from the transport
   void add_samples(const uint8_t *samples, int count)
   {
     xSemaphoreTake(m_semaphore, portMAX_DELAY);
@@ -62,31 +63,33 @@ public:
     xSemaphoreGive(m_semaphore);
   }
 
-  void remove_samples(uint8_t *samples, int count)
+  // convert the samples to 16 bit as they are going to the output
+  void remove_samples(int16_t *samples, int count)
   {
     xSemaphoreTake(m_semaphore, portMAX_DELAY);
     for (int i = 0; i < count; i++)
     {
-      samples[i] = 128;
+      samples[i] = 0;
       // if we have no samples and we aren't already buffering then we need to start buffering
       if (m_available_samples == 0 && !m_buffering)
       {
         Serial.println("Buffering");
         m_buffering = true;
-        samples[i] = 128;
+        samples[i] = 0;
       }
       // are we buffering?
       if (m_buffering && m_available_samples < m_number_samples_to_buffer)
       {
         // just return 0 as we don't have enough samples yet
-        samples[i] = 128;
+        samples[i] = 0;
       }
       else
       {
         // we've buffered enough samples so no need to buffer anymore
         m_buffering = false;
         // just send back the samples we've got and move the read head forward
-        samples[i] = m_buffer[m_read_head];
+        int16_t sample = m_buffer[m_read_head];
+        samples[i] = (sample - 128) << 5;
         m_read_head = (m_read_head + 1) % m_buffer_size;
         m_available_samples--;
       }
