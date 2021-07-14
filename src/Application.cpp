@@ -105,11 +105,6 @@ void Application::begin()
   m_indicator_led->set_is_flashing(false, 0x00ff00);
   // setup the transmit button
   pinMode(GPIO_TRANSMIT_BUTTON, INPUT_PULLDOWN);
-  // start both the input and output I2S devices
-  Serial.println("Starting I2S Output");
-  m_output->start(I2S_NUM_0, i2s_speaker_pins, m_output_buffer);
-  Serial.println("Starting I2S Input");
-  m_input->start(I2S_NUM_1, i2sMemsConfig, m_transport);
 }
 
 void Application::loop()
@@ -125,6 +120,10 @@ void Application::loop()
     // have we started receiving packets?
     if (current_time - m_transport->get_last_packet_received() < 200)
     {
+      // start the i2s output
+      Serial.println("Starting I2S Output");
+      m_output->start(I2S_NUM_0, i2s_speaker_pins, m_output_buffer);
+      // show that we are receiving data
       m_indicator_led->set_is_flashing(true, 0xff0000);
       m_current_state = RECEIVING;
     }
@@ -132,18 +131,26 @@ void Application::loop()
     {
       if (transmit_pushed)
       {
-        m_indicator_led->set_is_flashing(true, 0xff0000);
-        m_current_state = TRANSMITTING;
-        m_transport->should_send(true);
+          // start the microphone input
+          Serial.println("Starting I2S Input");
+          m_input->start(I2S_NUM_1, i2sMemsConfig, m_transport);
+          // show that we are transmitting data
+          m_indicator_led->set_is_flashing(true, 0xff0000);
+          m_current_state = TRANSMITTING;
+          m_transport->should_send(true);
       }
     }
   }
   break;
-  // the user has pushed the transmit button
+  // wait until the user stops tranmitting
   case TRANSMITTING:
   {
     if (!transmit_pushed)
     {
+      // stop the microphone
+      Serial.println("Stopping I2S Input");
+      m_input->stop();
+
       m_indicator_led->set_is_flashing(false, 0);
       m_current_state = IDLE;
       m_transport->should_send(false);
@@ -158,6 +165,8 @@ void Application::loop()
     if (current_time - m_transport->get_last_packet_received() > 200)
     {
       // haven't received any packets - switch back to idle
+      Serial.println("Stopping I2S Output");
+      m_output->stop();
       m_indicator_led->set_is_flashing(false, 0);
       m_current_state = IDLE;
       Serial.println("Finished receiving");
