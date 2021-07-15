@@ -1,3 +1,4 @@
+#include "Arduino.h"
 #include "Transport.h"
 
 Transport::Transport(OutputBuffer *output_buffer, size_t buffer_size)
@@ -15,10 +16,7 @@ void Transport::add_sample(int16_t sample)
   // have we reached a full packet?
   if (m_index == m_buffer_size)
   {
-    if (m_should_send)
-    {
-      send();
-    }
+    send();
     m_index = 0;
   }
 }

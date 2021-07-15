@@ -17,8 +17,8 @@
 // Generally they will default to LEFT - but you may need to attach the L/R pin to GND
 #define I2S_MIC_CHANNEL I2S_CHANNEL_FMT_ONLY_LEFT
 // #define I2S_MIC_CHANNEL I2S_CHANNEL_FMT_ONLY_RIGHT
-#define I2S_MIC_SERIAL_CLOCK GPIO_NUM_26
-#define I2S_MIC_LEFT_RIGHT_CLOCK GPIO_NUM_22
+#define I2S_MIC_SERIAL_CLOCK GPIO_NUM_18
+#define I2S_MIC_LEFT_RIGHT_CLOCK GPIO_NUM_19
 #define I2S_MIC_SERIAL_DATA GPIO_NUM_21
 
 // Analog Microphone Settings - ADC1_CHANNEL_7 is GPIO35
@@ -26,9 +26,11 @@
 
 // speaker settings
 #define USE_I2S_SPEAKER_OUTPUT
-#define I2S_SPEAKER_SERIAL_CLOCK GPIO_NUM_19
-#define I2S_SPEAKER_LEFT_RIGHT_CLOCK GPIO_NUM_27
-#define I2S_SPEAKER_SERIAL_DATA GPIO_NUM_18
+#define I2S_SPEAKER_SERIAL_CLOCK GPIO_NUM_18
+#define I2S_SPEAKER_LEFT_RIGHT_CLOCK GPIO_NUM_19
+#define I2S_SPEAKER_SERIAL_DATA GPIO_NUM_5
+// Shutdown line if you have this wired up or -1 if you don't
+#define I2S_SPEAKER_SD_PIN GPIO_NUM_22
 
 // transmit button
 #define GPIO_TRANSMIT_BUTTON 23

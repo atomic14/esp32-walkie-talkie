@@ -40,6 +40,11 @@ Application::Application()
   m_transport = new UdpTransport(m_output_buffer);
 #endif
   m_indicator_led = new TinyPICOIndicatorLed();
+
+  if (I2S_SPEAKER_SD_PIN != -1)
+  {
+    pinMode(I2S_SPEAKER_SD_PIN, OUTPUT);
+  }
 }
 
 void Application::begin()
@@ -116,6 +121,7 @@ void Application::loop()
     }
     // while the transmit button is not pushed and 1 second has not elapsed
     Serial.print("Started Receiving");
+    digitalWrite(I2S_SPEAKER_SD_PIN, HIGH);
     unsigned long start_time = millis();
     while (millis() - start_time < 1000 || !digitalRead(GPIO_TRANSMIT_BUTTON))
     {
@@ -124,6 +130,7 @@ void Application::loop()
       // and send the samples to the speaker
       m_output->write(samples, 128);
     }
+    digitalWrite(I2S_SPEAKER_SD_PIN, LOW);
     Serial.println("Finished Receiving");
   }
 }

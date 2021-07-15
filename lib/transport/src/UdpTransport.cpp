@@ -16,12 +16,12 @@ bool UdpTransport::begin()
   last_packet = millis();
   if (udp->listen(8192))
   {
-    udp->onPacket([this](AsyncUDPPacket packet) {
-      // our packets contain unsigned 8 bit PCM samples
-      // so we can push them straight into the output buffer
-      this->m_last_packet_received = millis();
-      this->m_output_buffer->add_samples(packet.data(), packet.length());
-    });
+    udp->onPacket([this](AsyncUDPPacket packet)
+                  {
+                    // our packets contain unsigned 8 bit PCM samples
+                    // so we can push them straight into the output buffer
+                    this->m_output_buffer->add_samples(packet.data(), packet.length());
+                  });
     return true;
   }
   Serial.println("Failed to listen");
