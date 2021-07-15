@@ -103,7 +103,6 @@ void Application::loop()
       {
         // read samples from the microphone
         int samples_read = m_input->read(samples, 128);
-        Serial.printf("Will send %d samples\n", samples_read);
         // and send them over the transport
         for (int i = 0; i < samples_read; i++)
         {
