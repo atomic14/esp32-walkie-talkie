@@ -92,7 +92,7 @@ void Application::loop()
     // do we need to start transmitting?
     if (digitalRead(GPIO_TRANSMIT_BUTTON))
     {
-      Serial.print("Started transmitting");
+      Serial.println("Started transmitting");
       // stop the output as we're switching into transmit mode
       m_output->stop();
       // start the input to get samples from the microphone
@@ -103,6 +103,7 @@ void Application::loop()
       {
         // read samples from the microphone
         int samples_read = m_input->read(samples, 128);
+        Serial.printf("Will send %d samples\n", samples_read);
         // and send them over the transport
         for (int i = 0; i < samples_read; i++)
         {
@@ -110,7 +111,7 @@ void Application::loop()
         }
       }
       // finished transmitting stop the input and start the output
-      Serial.print("Finished transmitting");
+      Serial.println("Finished transmitting");
       m_input->stop();
       m_output->start(SAMPLE_RATE);
     }
@@ -124,6 +125,6 @@ void Application::loop()
       // and send the samples to the speaker
       m_output->write(samples, 128);
     }
-    Serial.print("Finished Receiving");
+    Serial.println("Finished Receiving");
   }
 }
