@@ -98,6 +98,7 @@ void Application::loop()
     if (digitalRead(GPIO_TRANSMIT_BUTTON))
     {
       Serial.println("Started transmitting");
+      m_indicator_led->set_is_flashing(true, 0xff0000);
       // stop the output as we're switching into transmit mode
       m_output->stop();
       // start the input to get samples from the microphone
@@ -116,6 +117,7 @@ void Application::loop()
       }
       // finished transmitting stop the input and start the output
       Serial.println("Finished transmitting");
+      m_indicator_led->set_is_flashing(false, 0xff0000);
       m_input->stop();
       m_output->start(SAMPLE_RATE);
     }
