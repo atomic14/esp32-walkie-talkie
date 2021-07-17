@@ -15,6 +15,6 @@ void setup()
 
 void loop()
 {
-  application->loop();
-  delay(50);
+  // nothing to do - the application is doing all the work
+  vTaskDelay(pdMS_TO_TICKS(1000));
 }
