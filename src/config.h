@@ -8,8 +8,8 @@
 // sample rate for the system
 #define SAMPLE_RATE 16000
 
-// are you using an I2S microphone - comment this out if you want to use an analog mic and ADC input
-#define USE_I2S_MIC_INPUT
+// are you using an I2S microphone - comment this if you want to use an analog mic and ADC input
+// #define USE_I2S_MIC_INPUT
 
 // I2S Microphone Settings
 
@@ -41,7 +41,7 @@
 
 // Which transport do you want to use? ESP_NOW or UDP?
 // comment out this line to use UDP
-#define USE_ESP_NOW
+// #define USE_ESP_NOW
 
 // On which wifi channel (1-11) should ESP-Now transmit? The default ESP-Now channel on ESP32 is channel 1
 #define ESP_NOW_WIFI_CHANNEL 1
