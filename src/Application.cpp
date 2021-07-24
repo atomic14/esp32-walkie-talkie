@@ -11,10 +11,10 @@
 #include "OutputBuffer.h"
 #include "config.h"
 
-#ifdef USE_LED_GENERIC
-#include "GenericDevBoardIndicatorLed.h"
-#else
+#ifdef ARDUINO_TINYPICO
 #include "TinyPICOIndicatorLed.h"
+#else
+#include "GenericDevBoardIndicatorLed.h"
 #endif
 
 static void application_task(void *param)
@@ -47,12 +47,12 @@ Application::Application()
 
   m_transport->set_header(TRANSPORT_HEADER_SIZE,transport_header);
 
-#ifdef USE_LED_GENERIC
-  m_indicator_led = new GenericDevBoardIndicatorLed ();
-#else
+#ifdef ARDUINO_TINYPICO
   m_indicator_led = new TinyPICOIndicatorLed();
+#else
+  m_indicator_led = new GenericDevBoardIndicatorLed();
 #endif
-  
+
   if (I2S_SPEAKER_SD_PIN != -1)
   {
     pinMode(I2S_SPEAKER_SD_PIN, OUTPUT);
@@ -67,7 +67,6 @@ void Application::begin()
   m_indicator_led->begin();
   // bring up WiFi
   WiFi.mode(WIFI_STA);
-  // but don't connect if we're using ESP NOW
 #ifndef USE_ESP_NOW
   WiFi.begin(WIFI_SSID, WIFI_PSWD);
   if (WiFi.waitForConnectResult() != WL_CONNECTED)
@@ -81,6 +80,7 @@ void Application::begin()
   Serial.print("My IP Address is: ");
   Serial.println(WiFi.localIP());
 #else
+  // but don't connect if we're using ESP NOW
   WiFi.disconnect();
 #endif
   Serial.print("My MAC Address is: ");

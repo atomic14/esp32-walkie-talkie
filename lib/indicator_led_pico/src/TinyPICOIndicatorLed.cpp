@@ -1,6 +1,6 @@
-#include <TinyPICO.h>
-
 #include "TinyPICOIndicatorLed.h"
+
+#ifdef ARDUINO_TINYPICO
 
 TinyPICOIndicatorLed::TinyPICOIndicatorLed()
 {
@@ -10,3 +10,5 @@ void TinyPICOIndicatorLed::set_led_rgb(uint32_t color)
 {
   m_tp->DotStar_SetPixelColor(color);
 }
+
+#endif
