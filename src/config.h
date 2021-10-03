@@ -35,6 +35,10 @@
 // transmit button
 #define GPIO_TRANSMIT_BUTTON 23
 
+// Which LED pin do you want to use? TinyPico LED or the builtin LED of a generic ESP32 board?
+// Comment out this line to use the builtin LED of a generic ESP32 board
+// #define USE_LED_GENERIC
+
 // Which transport do you want to use? ESP_NOW or UDP?
 // comment out this line to use UDP
 #define USE_ESP_NOW
