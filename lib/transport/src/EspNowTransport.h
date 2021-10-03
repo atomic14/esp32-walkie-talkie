@@ -5,6 +5,8 @@
 class OutputBuffer;
 
 class EspNowTransport: public Transport {
+private:
+  uint8_t m_wifi_channel;
 protected:
   void send();
 public:
