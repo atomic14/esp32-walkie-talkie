@@ -39,6 +39,9 @@
 // comment out this line to use UDP
 #define USE_ESP_NOW
 
+// On which wifi channel should ESP-Now transmit? The default ESP-Now channel on ESP32 is channel 1
+#define ESP_NOW_WIFI_CHANNEL 1
+
 // i2s config for using the internal ADC
 extern i2s_config_t i2s_adc_config;
 // i2s config for reading from of I2S
