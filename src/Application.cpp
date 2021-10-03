@@ -115,6 +115,7 @@ void Application::loop()
           m_transport->add_sample(samples[i]);
         }
       }
+      m_transport->flush();
       // finished transmitting stop the input and start the output
       Serial.println("Finished transmitting");
       m_indicator_led->set_is_flashing(false, 0xff0000);
