@@ -1,7 +1,7 @@
 #include "Arduino.h"
 #include "GenericDevBoardIndicatorLed.h"
 
-const uint8_t BUILT_IN_LED = GPIO_NUM_2;
+const uint8_t BUILT_IN_LED = LED_BUILTIN;
 
 GenericDevBoardIndicatorLed::GenericDevBoardIndicatorLed()
 {
