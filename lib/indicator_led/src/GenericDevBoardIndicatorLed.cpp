@@ -1,7 +1,11 @@
 #include "Arduino.h"
 #include "GenericDevBoardIndicatorLed.h"
 
+#ifdef LED_BUILTIN
 const uint8_t BUILT_IN_LED = LED_BUILTIN;
+#else
+const uint8_t BUILT_IN_LED = GPIO_NUM_2;
+#endif
 
 GenericDevBoardIndicatorLed::GenericDevBoardIndicatorLed()
 {
