@@ -20,3 +20,12 @@ void Transport::add_sample(int16_t sample)
     m_index = 0;
   }
 }
+
+void Transport::flush()
+{
+  if (m_index >0 )
+  {
+    send();
+    m_index = 0;
+  }
+}
