@@ -46,7 +46,7 @@
 // uncomment the following line and define TRANSPORT_HEADER_SIZE 
 // #define TRANSPORT_HEADER_SIZE 0
 // also uncomment following line and define the transport_header in config.cpp
-extern uint8_t transport_header[TRANSPORT_HEADER_SIZE];
+// extern uint8_t transport_header[TRANSPORT_HEADER_SIZE];
 
 // i2s config for using the internal ADC
 extern i2s_config_t i2s_adc_config;
