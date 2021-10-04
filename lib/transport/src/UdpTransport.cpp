@@ -21,6 +21,10 @@ bool UdpTransport::begin()
                     // our packets contain unsigned 8 bit PCM samples
                     // so we can push them straight into the output buffer
                     this->m_output_buffer->add_samples(packet.data(), packet.length());
+                    if ((packet.length() > this->m_header_size) && (packet.length() <= MAX_UDP_SIZE) && (memcmp(packet.data(), this->m_buffer, this->m_header_size) == 0)) 
+                    {
+                      this->m_output_buffer->add_samples(packet.data() + m_header_size, packet.length() - m_header_size);
+                    }
                   });
     return true;
   }
