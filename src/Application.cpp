@@ -40,7 +40,7 @@ Application::Application()
 #endif
 
 #ifdef USE_ESP_NOW
-  m_transport = new EspNowTransport(m_output_buffer);
+  m_transport = new EspNowTransport(m_output_buffer,ESP_NOW_WIFI_CHANNEL);
 #else
   m_transport = new UdpTransport(m_output_buffer);
 #endif
@@ -125,6 +125,7 @@ void Application::loop()
           m_transport->add_sample(samples[i]);
         }
       }
+      m_transport->flush();
       // finished transmitting stop the input and start the output
       Serial.println("Finished transmitting");
       m_indicator_led->set_is_flashing(false, 0xff0000);

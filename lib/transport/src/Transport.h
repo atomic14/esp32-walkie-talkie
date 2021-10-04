@@ -19,5 +19,6 @@ protected:
 public:
   Transport(OutputBuffer *output_buffer, size_t buffer_size);
   void add_sample(int16_t sample);
+  void flush();
   virtual bool begin() = 0;
 };
