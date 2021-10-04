@@ -1,5 +1,9 @@
 #include "config.h"
 
+// In case each transport packet needs to start with a specific header, uncomment following line (see also config.h)
+// For example, when TRANSPORT_HEADER_SIZE is defined as 3,  define transport_header for example as {0x1F, 0xCD, 0x01};
+// uint8_t transport_header[TRANSPORT_HEADER_SIZE] = {};
+
 // i2s config for using the internal ADC
 i2s_config_t i2s_adc_config = {
     .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_ADC_BUILT_IN),
