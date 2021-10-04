@@ -17,6 +17,11 @@ void receiveCallback(const uint8_t *macAddr, const uint8_t *data, int dataLen)
 
 bool EspNowTransport::begin()
 {
+  // Set Wifi channel
+  esp_wifi_set_promiscuous(true);
+  esp_wifi_set_channel(m_wifi_channel, WIFI_SECOND_CHAN_NONE);
+  esp_wifi_set_promiscuous(false);
+  
   esp_err_t result = esp_now_init();
   if (result == ESP_OK)
   {
@@ -43,9 +48,10 @@ bool EspNowTransport::begin()
   return true;
 }
 
-EspNowTransport::EspNowTransport(OutputBuffer *output_buffer) : Transport(output_buffer, MAX_ESP_NOW_PACKET_SIZE)
+EspNowTransport::EspNowTransport(OutputBuffer *output_buffer, uint8_t wifi_channel) : Transport(output_buffer, MAX_ESP_NOW_PACKET_SIZE)
 {
-  instance = this;
+  instance = this;  
+  m_wifi_channel = wifi_channel;
 }
 
 void EspNowTransport::send()

@@ -35,7 +35,7 @@ Application::Application()
 #endif
 
 #ifdef USE_ESP_NOW
-  m_transport = new EspNowTransport(m_output_buffer);
+  m_transport = new EspNowTransport(m_output_buffer,ESP_NOW_WIFI_CHANNEL);
 #else
   m_transport = new UdpTransport(m_output_buffer);
 #endif
