@@ -20,5 +20,6 @@ public:
         i2s_config_t i2s_config,
         int raw_samples_size,
         bool fixSPH0645 = false);
+    ~I2SMEMSSampler();
     virtual int read(int16_t *samples, int count);
 };
