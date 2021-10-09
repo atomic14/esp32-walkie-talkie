@@ -10,6 +10,13 @@ const int NUM_FRAMES_TO_SEND = 256;
 
 Output::Output(i2s_port_t i2s_port) : m_i2s_port(i2s_port)
 {
+  // this will contain the prepared samples for sending to the I2S device
+  m_frames = (int16_t *)malloc(2 * sizeof(int16_t) * NUM_FRAMES_TO_SEND);
+}
+
+Output::~Output()
+{
+  free(m_frames);
 }
 
 void Output::stop()
@@ -21,8 +28,6 @@ void Output::stop()
 
 void Output::write(int16_t *samples, int count)
 {
-  // this will contain the prepared samples for sending to the I2S device
-  int16_t *frames = (int16_t *)malloc(2 * sizeof(int16_t) * NUM_FRAMES_TO_SEND);
   int sample_index = 0;
   while (sample_index < count)
   {
@@ -30,18 +35,17 @@ void Output::write(int16_t *samples, int count)
     for (int i = 0; i < NUM_FRAMES_TO_SEND && sample_index < count; i++)
     {
       int sample = process_sample(samples[sample_index]);
-      frames[i * 2] = sample;
-      frames[i * 2 + 1] = sample;
+      m_frames[i * 2] = sample;
+      m_frames[i * 2 + 1] = sample;
       samples_to_send++;
       sample_index++;
     }
     // write data to the i2s peripheral
     size_t bytes_written = 0;
-    i2s_write(m_i2s_port, frames, samples_to_send * sizeof(int16_t) * 2, &bytes_written, portMAX_DELAY);
+    i2s_write(m_i2s_port, m_frames, samples_to_send * sizeof(int16_t) * 2, &bytes_written, portMAX_DELAY);
     if (bytes_written != samples_to_send * sizeof(int16_t) * 2)
     {
       ESP_LOGE(TAG, "Did not write all bytes");
     }
   }
-  free(frames);
 }
