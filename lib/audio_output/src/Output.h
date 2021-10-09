@@ -8,11 +8,15 @@
  **/
 class Output
 {
+private:
+  int16_t *m_frames;
+
 protected:
   i2s_port_t m_i2s_port = I2S_NUM_0;
 
 public:
   Output(i2s_port_t i2s_port);
+  ~Output();
   virtual void start(int sample_rate) = 0;
   void stop();
   // override this in derived classes to turn the sample into
