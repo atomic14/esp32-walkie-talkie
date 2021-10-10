@@ -39,6 +39,9 @@ Application::Application()
 #else
   m_transport = new UdpTransport(m_output_buffer);
 #endif
+
+  m_transport->set_header(TRANSPORT_HEADER_SIZE,transport_header);
+
   m_indicator_led = new TinyPICOIndicatorLed();
 
   if (I2S_SPEAKER_SD_PIN != -1)
