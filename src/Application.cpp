@@ -9,8 +9,13 @@
 #include "UdpTransport.h"
 #include "EspNowTransport.h"
 #include "OutputBuffer.h"
-#include "TinyPICOIndicatorLed.h"
 #include "config.h"
+
+#ifdef USE_LED_GENERIC
+#include "GenericDevBoardIndicatorLed.h"
+#else
+#include "TinyPICOIndicatorLed.h"
+#endif
 
 static void application_task(void *param)
 {
@@ -42,8 +47,12 @@ Application::Application()
 
   m_transport->set_header(TRANSPORT_HEADER_SIZE,transport_header);
 
+#ifdef USE_LED_GENERIC
+  m_indicator_led = new GenericDevBoardIndicatorLed ();
+#else
   m_indicator_led = new TinyPICOIndicatorLed();
-
+#endif
+  
   if (I2S_SPEAKER_SD_PIN != -1)
   {
     pinMode(I2S_SPEAKER_SD_PIN, OUTPUT);
