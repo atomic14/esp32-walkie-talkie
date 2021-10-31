@@ -2,6 +2,9 @@
 
 #include "IndicatorLed.h"
 
+#ifdef ARDUINO_TINYPICO
+#include <TinyPICO.h>
+
 class TinyPICO;
 class TinyPICOIndicatorLed : public IndicatorLed
 {
@@ -14,3 +17,5 @@ protected:
 public:
   TinyPICOIndicatorLed();
 };
+
+#endif
