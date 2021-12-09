@@ -1,5 +1,6 @@
 #pragma once
 
+#include <driver/adc.h>
 #include "I2SSampler.h"
 
 class ADCSampler : public I2SSampler
