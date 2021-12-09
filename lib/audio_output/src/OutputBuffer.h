@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
-#include <FreeRTOS.h>
+#include <freertos/FreeRTOS.h>
 
 /**
  * @brief Circular buffer for 8 bit unsigned PCM samples
