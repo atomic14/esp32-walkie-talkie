@@ -5,7 +5,9 @@
 // For example, when TRANSPORT_HEADER_SIZE is defined as 3,  define transport_header for example as {0x1F, 0xCD, 0x01};
 uint8_t transport_header[TRANSPORT_HEADER_SIZE] = {};
 
+
 // i2s config for using the internal ADC
+#if CONFIG_IDF_TARGET_ESP32 || CONFIG_IDF_TARGET_ESP32S2 || CONFIG_IDF_TARGET_ESP32S3
 i2s_config_t i2s_adc_config = {
     .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_ADC_BUILT_IN),
     .sample_rate = SAMPLE_RATE,
@@ -18,6 +20,7 @@ i2s_config_t i2s_adc_config = {
     .use_apll = false,
     .tx_desc_auto_clear = false,
     .fixed_mclk = 0};
+#endif
 
 // i2s config for reading from I2S
 i2s_config_t i2s_mic_Config = {
