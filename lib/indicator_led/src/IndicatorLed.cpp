@@ -1,4 +1,5 @@
-#include <FreeRTOS.h>
+#include <Arduino.h>
+#include <freertos/FreeRTOS.h>
 #include "IndicatorLed.h"
 
 void update_indicator_task(void *param)

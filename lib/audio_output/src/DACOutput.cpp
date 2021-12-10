@@ -1,5 +1,6 @@
-
 #include "DACOutput.h"
+
+#if CONFIG_IDF_TARGET_ESP32 || CONFIG_IDF_TARGET_ESP32S2 || CONFIG_IDF_TARGET_ESP32S3
 
 void DACOutput::start(int sample_rate)
 {
@@ -25,3 +26,5 @@ void DACOutput::start(int sample_rate)
 
     i2s_start(I2S_NUM_0);
 }
+
+#endif

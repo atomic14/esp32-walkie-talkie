@@ -1,5 +1,6 @@
 #include <freertos/FreeRTOS.h>
 #include <driver/i2s.h>
+#include <driver/gpio.h>
 
 // WiFi credentials
 #define WIFI_SSID << YOUR_SSID >>
