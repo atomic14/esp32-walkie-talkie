@@ -6,6 +6,7 @@
 #include "I2SMEMSSampler.h"
 #include "ADCSampler.h"
 #include "I2SOutput.h"
+#include "DACOutput.h"
 #include "UdpTransport.h"
 #include "EspNowTransport.h"
 #include "OutputBuffer.h"
