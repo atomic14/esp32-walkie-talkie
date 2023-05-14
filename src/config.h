@@ -47,17 +47,20 @@
 // On which wifi channel (1-11) should ESP-Now transmit? The default ESP-Now channel on ESP32 is channel 1
 #define ESP_NOW_WIFI_CHANNEL 1
 
-// In case all transport packets need a header (to avoid interference with other applications or walkie talkie sets), 
+// In case all transport packets need a header (to avoid interference with other applications or walkie talkie sets),
 // specify TRANSPORT_HEADER_SIZE (the length in bytes of the header) in the next line, and define the transport header in config.cpp
 #define TRANSPORT_HEADER_SIZE 0
 extern uint8_t transport_header[TRANSPORT_HEADER_SIZE];
 
 
+#ifndef USE_I2S_MIC_INPUT
 // i2s config for using the internal ADC
 extern i2s_config_t i2s_adc_config;
+#else
 // i2s config for reading from of I2S
 extern i2s_config_t i2s_mic_Config;
 // i2s microphone pins
 extern i2s_pin_config_t i2s_mic_pins;
+#endif
 // i2s speaker pins
 extern i2s_pin_config_t i2s_speaker_pins;

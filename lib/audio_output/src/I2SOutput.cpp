@@ -5,7 +5,7 @@ I2SOutput::I2SOutput(i2s_port_t i2s_port, i2s_pin_config_t &i2s_pins) : Output(i
 {
 }
 
-void I2SOutput::start(int sample_rate)
+void I2SOutput::start(unsigned int sample_rate)
 {
     // i2s config for writing both channels of I2S
     i2s_config_t i2s_config = {
