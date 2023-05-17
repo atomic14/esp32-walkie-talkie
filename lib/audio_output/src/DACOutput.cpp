@@ -10,7 +10,11 @@ void DACOutput::start(uint32_t sample_rate)
         .sample_rate = sample_rate,
         .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
         .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
-        .communication_format = (i2s_comm_format_t)(I2S_COMM_FORMAT_I2S_MSB),
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 2, 0)
+        .communication_format = (i2s_comm_format_t)(I2S_COMM_FORMAT_STAND_MSB),
+#else
+        .communication_format = (i2s_comm_format_t)(I2S_COMM_FORMAT_I2S_MSB),        
+#endif
         .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1,
         .dma_buf_count = 2,
         .dma_buf_len = 1024,
