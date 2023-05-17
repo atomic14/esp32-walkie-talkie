@@ -2,7 +2,7 @@
 
 #if CONFIG_IDF_TARGET_ESP32
 
-void DACOutput::start(int sample_rate)
+void DACOutput::start(uint32_t sample_rate)
 {
     // i2s config for writing both channels of I2S
     i2s_config_t i2s_config = {
