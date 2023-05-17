@@ -17,7 +17,7 @@ protected:
 public:
   Output(i2s_port_t i2s_port);
   ~Output();
-  virtual void start(int sample_rate) = 0;
+  virtual void start(uint32_t sample_rate) = 0;
   void stop();
   // override this in derived classes to turn the sample into
   // something the output device expects - for the default case
