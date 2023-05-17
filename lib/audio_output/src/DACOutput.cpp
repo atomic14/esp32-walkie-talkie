@@ -20,7 +20,12 @@ void DACOutput::start(uint32_t sample_rate)
         .dma_buf_len = 1024,
         .use_apll = false,
         .tx_desc_auto_clear = true,
-        .fixed_mclk = 0};
+        .fixed_mclk = 0,
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 4, 0)
+        .mclk_multiple = I2S_MCLK_MULTIPLE_DEFAULT, // Unused
+        .bits_per_chan = I2S_BITS_PER_CHAN_DEFAULT // Use bits per sample
+#endif
+        };
     //install and start i2s driver
     i2s_driver_install(I2S_NUM_0, &i2s_config, 0, NULL);
     // enable the DAC channels
