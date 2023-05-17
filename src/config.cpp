@@ -14,7 +14,7 @@ i2s_config_t i2s_adc_config = {
     .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
     .channel_format = I2S_MIC_CHANNEL,
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 2, 0)
-    .communication_format = I2S_COMM_FORMAT_I2S_MSB,
+    .communication_format = I2S_COMM_FORMAT_STAND_MSB,
 #else
     .communication_format = I2S_COMM_FORMAT_I2S_LSB,
 #endif
