@@ -136,7 +136,7 @@ void Application::loop()
       m_output->start(SAMPLE_RATE);
     }
     // while the transmit button is not pushed and 1 second has not elapsed
-    Serial.print("Started Receiving");
+    Serial.println("Started Receiving");
     digitalWrite(I2S_SPEAKER_SD_PIN, HIGH);
     unsigned long start_time = millis();
     while (millis() - start_time < 1000 || !digitalRead(GPIO_TRANSMIT_BUTTON))
