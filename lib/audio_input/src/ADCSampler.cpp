@@ -16,6 +16,12 @@ void ADCSampler::configureI2S()
     i2s_adc_enable(m_i2sPort);
 }
 
+void ADCSampler::endconfigureI2S()
+{
+    // disable the adc
+    i2s_adc_disable(m_i2sPort);
+}
+
 int ADCSampler::read(int16_t *samples, int count)
 {
     // read from i2s
