@@ -5,12 +5,16 @@ I2SOutput::I2SOutput(i2s_port_t i2s_port, i2s_pin_config_t &i2s_pins) : Output(i
 {
 }
 
-void I2SOutput::start(int sample_rate)
+void I2SOutput::start(uint32_t sample_rate)
 {
     // i2s config for writing both channels of I2S
     i2s_config_t i2s_config = {
         .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_TX),
-        .sample_rate = sample_rate,
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 4, 1)
+        .sample_rate = sample_rate, 
+#else
+        .sample_rate = (int)sample_rate, 
+#endif
         .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
         .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 2, 0)
@@ -23,7 +27,12 @@ void I2SOutput::start(int sample_rate)
         .dma_buf_len = 1024,
         .use_apll = false,
         .tx_desc_auto_clear = true,
-        .fixed_mclk = 0};
+        .fixed_mclk = 0,
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 4, 1)
+        .mclk_multiple = I2S_MCLK_MULTIPLE_DEFAULT, // Unused
+        .bits_per_chan = I2S_BITS_PER_CHAN_DEFAULT // Use bits per sample
+#endif
+        };
     //install and start i2s driver
     i2s_driver_install(m_i2s_port, &i2s_config, 0, NULL);
     // set up the i2s pins
