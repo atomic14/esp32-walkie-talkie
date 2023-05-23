@@ -16,8 +16,8 @@ void I2SSampler::start()
 
 void I2SSampler::stop()
 {
-    // end configuration of I2S (e.g. to release lock on adc)
-    endconfigureI2S();
+    // clear any I2S configuration
+    unConfigureI2S();
     // stop the i2S driver
     i2s_driver_uninstall(m_i2sPort);
 }
