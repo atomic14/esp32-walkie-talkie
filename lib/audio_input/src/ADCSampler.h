@@ -11,6 +11,7 @@ private:
 
 protected:
     void configureI2S();
+    void unConfigureI2S();
 
 public:
     ADCSampler(adc_unit_t adc_unit, adc1_channel_t adc_channel, const i2s_config_t &i2s_config);
