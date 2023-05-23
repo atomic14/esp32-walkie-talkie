@@ -12,7 +12,6 @@ private:
 
 protected:
     void configureI2S();
-    void endconfigureI2S()  {}
     
 public:
     I2SMEMSSampler(
