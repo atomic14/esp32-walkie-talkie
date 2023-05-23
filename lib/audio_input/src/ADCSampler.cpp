@@ -16,9 +16,9 @@ void ADCSampler::configureI2S()
     i2s_adc_enable(m_i2sPort);
 }
 
-void ADCSampler::endconfigureI2S()
+void ADCSampler::unConfigureI2S()
 {
-    // disable the adc
+    // make sure ot do this or the ADC is locked
     i2s_adc_disable(m_i2sPort);
 }
 
