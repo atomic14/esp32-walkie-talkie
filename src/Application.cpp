@@ -66,6 +66,10 @@ void Application::begin()
   m_indicator_led->set_default_color(0);
   m_indicator_led->set_is_flashing(true, 0xff0000);
   m_indicator_led->begin();
+
+  Serial.print("My IDF Version is: ");
+  Serial.println(esp_get_idf_version());
+
   // bring up WiFi
   WiFi.mode(WIFI_STA);
 #ifndef USE_ESP_NOW
