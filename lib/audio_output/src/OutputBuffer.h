@@ -100,4 +100,14 @@ public:
     }
     xSemaphoreGive(m_semaphore);
   }
+
+  void flush()
+  {
+    // flush all samples in the outputbuffer
+    xSemaphoreTake(m_semaphore, portMAX_DELAY);
+    m_read_head = 0;
+    m_write_head = 0;
+    m_available_samples = 0;
+    xSemaphoreGive(m_semaphore);
+  }
 };
