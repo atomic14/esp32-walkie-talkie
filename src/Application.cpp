@@ -99,6 +99,8 @@ void Application::begin()
   pinMode(GPIO_TRANSMIT_BUTTON, INPUT_PULLDOWN);
   // start off with i2S output running
   m_output->start(SAMPLE_RATE);
+  // flush all samples received during startup
+  m_output_buffer->flush();
   // start the main task for the application
   TaskHandle_t task_handle;
   xTaskCreate(application_task, "application_task", 8192, this, 1, &task_handle);
@@ -132,7 +134,10 @@ void Application::loop()
           m_transport->add_sample(samples[i]);
         }
       }
+      // send all packets still in the transport buffer
       m_transport->flush();
+      // throw away all packets that have been received during transmission
+      m_output_buffer->flush();
       // finished transmitting stop the input and start the output
       Serial.println("Finished transmitting");
       m_indicator_led->set_is_flashing(false, 0xff0000);
