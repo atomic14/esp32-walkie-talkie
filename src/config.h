@@ -18,23 +18,39 @@
 // Generally they will default to LEFT - but you may need to attach the L/R pin to GND
 #define I2S_MIC_CHANNEL I2S_CHANNEL_FMT_ONLY_LEFT
 // #define I2S_MIC_CHANNEL I2S_CHANNEL_FMT_ONLY_RIGHT
+#ifndef I2S_MIC_SERIAL_CLOCK
 #define I2S_MIC_SERIAL_CLOCK GPIO_NUM_18
+#endif
+#ifndef I2S_MIC_LEFT_RIGHT_CLOCK
 #define I2S_MIC_LEFT_RIGHT_CLOCK GPIO_NUM_19
+#endif
+#ifndef I2S_MIC_SERIAL_DATA
 #define I2S_MIC_SERIAL_DATA GPIO_NUM_21
+#endif
 
 // Analog Microphone Settings - ADC1_CHANNEL_7 is GPIO35
 #define ADC_MIC_CHANNEL ADC1_CHANNEL_7
 
 // speaker settings
 #define USE_I2S_SPEAKER_OUTPUT
+#ifndef I2S_SPEAKER_SERIAL_CLOCK
 #define I2S_SPEAKER_SERIAL_CLOCK GPIO_NUM_18
+#endif
+#ifndef I2S_SPEAKER_LEFT_RIGHT_CLOCK
 #define I2S_SPEAKER_LEFT_RIGHT_CLOCK GPIO_NUM_19
+#endif
+#ifndef I2S_SPEAKER_SERIAL_DATA
 #define I2S_SPEAKER_SERIAL_DATA GPIO_NUM_5
+#endif
 // Shutdown line if you have this wired up or -1 if you don't
+#ifndef I2S_SPEAKER_SD_PIN
 #define I2S_SPEAKER_SD_PIN GPIO_NUM_22
+#endif
 
 // transmit button
+#ifndef GPIO_TRANSMIT_BUTTON
 #define GPIO_TRANSMIT_BUTTON 23
+#endif
 
 // Which LED pin do you want to use? TinyPico LED or the builtin LED of a generic ESP32 board?
 // Comment out this line to use the builtin LED of a generic ESP32 board
