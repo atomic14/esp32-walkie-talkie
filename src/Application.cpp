@@ -136,8 +136,6 @@ void Application::loop()
       }
       // send all packets still in the transport buffer
       m_transport->flush();
-      // throw away all packets that have been received during transmission
-      m_output_buffer->flush();
       // finished transmitting stop the input and start the output
       Serial.println("Finished transmitting");
       m_indicator_led->set_is_flashing(false, 0xff0000);
